@@ -1,3 +1,0 @@
-﻿  Source.cpp
-C:\Users\Arnold Suptelch\source\repos\lab2p4\lab2p4\Source.cpp(11,9): warning C4244:  =: преобразование "double" в "int", возможна потеря данных
-  lab2p4.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab2p4\x64\Debug\lab2p4.exe
