@@ -1,0 +1,3 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp3\lab3Cp3-6\Source.cpp(20,26): warning C4305:  инициализация: усечение из "double" в "float"
+  lab3Cp3-6.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp3\x64\Debug\lab3Cp3-6to9.exe

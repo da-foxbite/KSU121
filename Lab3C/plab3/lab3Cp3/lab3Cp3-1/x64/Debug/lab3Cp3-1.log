@@ -1,0 +1,6 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp3\lab3Cp3-1\Source.cpp(17,34): warning C4244:  инициализация: преобразование "double" в "unsigned __int64", возможна потеря данных
+C:\Users\Arnold Suptelch\source\repos\lab3Cp3\lab3Cp3-1\Source.cpp(17,45): warning C4056:  переполнение при арифметических операциях с константой с плавающей точкой
+C:\Users\Arnold Suptelch\source\repos\lab3Cp3\lab3Cp3-1\Source.cpp(22,23): warning C4305:  инициализация: усечение из "double" в "float"
+C:\Users\Arnold Suptelch\source\repos\lab3Cp3\lab3Cp3-1\Source.cpp(23,23): warning C4305:  инициализация: усечение из "double" в "float"
+  lab3Cp3-1.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp3\x64\Debug\lab3Cp3-1.exe
