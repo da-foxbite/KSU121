@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp4\lab3Cp4-3\Source.cpp(14,19): warning C4305:  аргумент: усечение из "double" в "float"
+C:\Users\Arnold Suptelch\source\repos\lab3Cp4\lab3Cp4-3\Source.cpp(20,17): warning C4244:  return: преобразование "double" в "float", возможна потеря данных
+  lab3Cp4-3.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp4\x64\Debug\lab3Cp4-3.exe
