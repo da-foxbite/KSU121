@@ -1,0 +1,6 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-9\Source.cpp(32,20): warning C4311:  приведение типов: усечение указателя из "WorkerRaw *" в "int"
+  WorkerRaw.cpp
+  Создание кода...
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-9\Source.cpp(32,20): warning C4302:  приведение типов: усечение из "WorkerRaw *" к "int"
+  lab3Cp9-9.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp9\x64\Debug\lab3Cp9-9.exe

@@ -1,0 +1,5 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp10-1\lab3Cp10-11to13\Circle.h(17,8): warning C4101:  itsY: неиспользованная локальная переменная
+C:\Users\Arnold Suptelch\source\repos\lab3Cp10-1\lab3Cp10-11to13\Circle.h(16,8): warning C4101:  itsX: неиспользованная локальная переменная
+C:\Users\Arnold Suptelch\source\repos\lab3Cp10-1\lab3Cp10-11to13\Circle.h(18,8): warning C4101:  itsRadius: неиспользованная локальная переменная
+  lab3Cp10-11to13.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp10-1\x64\Debug\lab3Cp10-z11to13.exe

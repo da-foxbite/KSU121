@@ -1,0 +1,2 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp8\lab3Cp8-z12\Source.cpp(46): warning C26495: Переменная "Worker::TabelNo" не инициализирована. Всегда инициализируйте переменную-член (type.6).

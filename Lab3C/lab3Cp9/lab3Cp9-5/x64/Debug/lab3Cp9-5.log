@@ -1,0 +1,8 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-5\Source.cpp(56,21): warning C4244:  инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-5\Source.cpp(61,22): warning C4244:  инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-5\Source.cpp(66,24): warning C4244:  инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-5\Source.cpp(57): warning C4172:  возвращение адреса локальной или временной переменной : circumferRes
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-5\Source.cpp(62): warning C4172:  возвращение адреса локальной или временной переменной : circleareaRes
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-5\Source.cpp(67): warning C4172:  возвращение адреса локальной или временной переменной : spherevolumeRes
+  lab3Cp9-5.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp9\x64\Debug\lab3Cp9-5.exe

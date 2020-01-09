@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Arnold Suptelch\source\repos\lab3Cp8\lab3Cp8-z12\</FILEPATH>
+      <FILENAME>Source.cpp</FILENAME>
+      <LINE>46</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Worker::TabelNo" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Worker::{ctor}</FUNCTION>
+    <DECORATED>??0Worker@@QEAA@XZ</DECORATED>
+    <FUNCLINE>46</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Worker::TabelNo</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Arnold Suptelch\source\repos\lab3Cp8\lab3Cp8-z12\</FILEPATH>
+      <FILENAME>Source.cpp</FILENAME>
+      <LINE>46</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Worker::age" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Worker::{ctor}</FUNCTION>
+    <DECORATED>??0Worker@@QEAA@XZ</DECORATED>
+    <FUNCLINE>46</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Worker::age</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Arnold Suptelch\source\repos\lab3Cp8\lab3Cp8-z12\</FILEPATH>
+      <FILENAME>Source.cpp</FILENAME>
+      <LINE>46</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Worker::weight" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Worker::{ctor}</FUNCTION>
+    <DECORATED>??0Worker@@QEAA@XZ</DECORATED>
+    <FUNCLINE>46</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Worker::weight</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Arnold Suptelch\source\repos\lab3Cp8\lab3Cp8-z12\</FILEPATH>
+      <FILENAME>Source.cpp</FILENAME>
+      <LINE>46</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Worker::TarifStavka" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Worker::{ctor}</FUNCTION>
+    <DECORATED>??0Worker@@QEAA@XZ</DECORATED>
+    <FUNCLINE>46</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Worker::TarifStavka</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

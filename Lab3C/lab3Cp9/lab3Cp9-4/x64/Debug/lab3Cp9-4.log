@@ -1,0 +1,5 @@
+﻿  Source.cpp
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-4\Source.cpp(56): warning C4172:  возвращение адреса локальной или временной переменной : scnddegreeRes
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-4\Source.cpp(61): warning C4172:  возвращение адреса локальной или временной переменной : thrddegreeRes
+C:\Users\Arnold Suptelch\source\repos\lab3Cp9\lab3Cp9-4\Source.cpp(66): warning C4172:  возвращение адреса локальной или временной переменной : reciprocalRes
+  lab3Cp9-4.vcxproj -> C:\Users\Arnold Suptelch\source\repos\lab3Cp9\x64\Debug\lab3Cp9-4.exe
