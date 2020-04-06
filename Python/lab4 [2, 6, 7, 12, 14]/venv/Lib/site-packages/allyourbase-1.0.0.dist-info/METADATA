@@ -1,0 +1,35 @@
+Metadata-Version: 2.0
+Name: allyourbase
+Version: 1.0.0
+Summary: Numerical base converter, allowing arbitrary floating point precision and conversion between any integer bases
+Home-page: https://bitbucket.org/birnam/allyourbase
+Author: David Woods
+Author-email: d@vidwoods.com
+License: MIT
+Keywords: base radix conversion convert float precision
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Provides-Extra: dev
+Provides-Extra: test
+
+allyourbase
+===========
+
+All Your Base is a python library for converting number strings from any base to number strings of any other base.
+
+This library was created to make the following improvements on existing base conversion libraries out there:
+
+- Can convert both integers and floats
+- Uses Decimal package to allow for arbitrary precision / number of digits
+- Uses Decimal package to avoid binary rounding errors
+- Is not limited to base 36, 62, 64 due to available characters. Can convert to/from any integer base from 2 to whatever you like. (higher bases use delimited decimal format)
+
+
