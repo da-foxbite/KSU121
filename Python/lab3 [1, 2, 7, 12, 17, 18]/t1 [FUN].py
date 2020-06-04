@@ -13,7 +13,7 @@ m, n = map(int, input("M x N: ").split())
 print("Введіть інтервал для генерації . . . \n")
 hidari = int(input("Лiва межа: "))
 migi = int(input("Права межа: "))
-ra.seed()                                          # seed это из майнкрафта да? [рандом в рандоме]
+#ra.seed()  # пожалуй, не пригодится
 for i in range(n):
     a.append([0] * m)                              # расширение массива на м эл.
     for j in range(m):

@@ -1,0 +1,7 @@
+Filename: file2
+Directory: C:\Users\Arnold Suptelch\PycharmProjects\lab9w10
+OS: Windows 10.0.18362 10 
+Username: Arnold Suptelch
+Hardware: AMD64, Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+Encoding: utf-8
+Python: 3.7.4, MSC v.1916 32 bit (Intel)
