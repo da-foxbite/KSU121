@@ -1,0 +1,137 @@
+/************************************************************************************************************************/
+body{
+    background-image:url("misc/BG_Tux.png");
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24pt;
+    color: black;
+    text-align: left;
+    text-indent: 30px;
+    margin-left: 12px;
+    /*line-height: 37px;*/
+}
+
+h1{
+    text-align: center;
+    font-size: 41pt;
+}
+
+/* переписать или полностью заменить */
+.centrespan{
+    position: absolute;
+    top: 250px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28pt;
+    color: black;
+    text-align: center;
+    text-indent: 30px;
+    margin-right: 10px;
+}
+
+strong{
+    font-weight: bold;
+}
+
+.box{
+    display: block;
+    width: 960px;
+    height: 720px;
+    padding: 15px 0px;
+    border: 1px solid black;
+    box-shadow: 0px 10px 13px -7px #000000, 8px 11px 10px 6px rgba(0, 0, 0, 0.228);
+    border-radius: 20px;
+    background-size: 100%;
+
+    background-color: rgba(141, 169, 187, 0.65);
+}
+
+/* сделать чот для строчек шоб по красоте в конце добавить */
+
+.box.present .anim-rotate{
+    display: inline-block;
+    transform: rotate(-6deg);
+    transition: 0.4s;
+    transition-delay: 0.1s;
+}
+
+/************************************************************************************************************************/
+
+
+#step_3_pic_1{
+    width: 725px;
+    height: auto;
+    position: absolute;
+    left: 117.5px;
+    top: 280px;
+}
+
+#step_4_pic_1{
+    width: 445px;
+    height: 440px;
+    position: absolute;
+    left: 485px;
+    top: 290px;
+}
+
+
+#step_6_pic_1{
+    width: 700px;
+    height: auto;
+    position: absolute;
+    left: 130px;
+    top: 285px;
+}
+
+
+#step_7_pic_1{
+    width: 730px;
+    height: auto;
+    position: absolute;
+    left: 115px;
+    top: 255px;
+}
+
+#step_9_pic_1{
+    width: 725px;
+    height: auto;
+    position: absolute;
+    left: 117.5px;
+    top: 270px;
+}
+
+#step_11_pic_1{
+    width: 875px;
+    height: auto;
+    position: absolute;
+    left: 42.5px;
+    top: 175px;
+}
+
+#step_12_pic_1{
+    width: 775px;
+    height: auto;
+    position: absolute;
+    left: 92.5px;
+    top: 135px;
+}
+
+#step_13_pic_1{
+    width: 850px;
+    height: auto;
+    position: absolute;
+    left: 50px;
+    top: 175px;
+}
+
+#step_15_pic_1{
+    width: 100px;
+    height: auto;
+    position: absolute;
+    left: 820px;
+    top: 580px;
+}
+*/
+
+/************************************************************************************************************************/

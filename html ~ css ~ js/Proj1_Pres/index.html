@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<!-- до сих пор не ясно должна ли это быть презентация про конкретную ОС/Дистрибутив или сравение или чот ещё но пусть уже будет это -->
+    <body>
+        <div id="impress">
+
+            <div id="step_0" class="step box" data-x="0" data-y="-1000" data-z="0"  data-rotate-x="-360">
+                <span class="centrespan">
+                    <h1><code>Основные отличия систем семейств <i>Windows</i> и <i>GNU/Linux</i></code></h1>
+                </span>
+            </div>
+
+            <div id="step_1" class="step box" data-x="0" data-y="0" data-z="0"  data-rotate-x="-360">
+                <h1><strong><code>Определение</code></strong></h1>
+                <span class="centrespan">
+                    <strong>Windows</strong> — это семейство <i>коммерческих</i> ОС на ядре <kbd>Windows NT</kbd> от компании Microsoft. 
+                </span>
+            </div>
+
+            
+            <div id="step_2" class="step box" data-x="0" data-y="1000" data-z="0" data-rotate-x="-235">
+                <h1><strong><code>Определение</code></strong></h1>
+                <span class="centrespan">
+                    <strong>Linux</strong> — это семейство <i>"свободных"</i> ОС на базе ядра <kbd>Linux</kbd>, с сотнями дистрибутивов в числе представителей.
+                </span>
+            </div>
+
+            
+            <div id="step_3" class="step box" data-x="0" data-y="2000" data-z="0" data-rotate-x="-235">
+                <h1><strong><code>Kernel</code></strong></h1>
+                <p>
+                    <strong>Ядро Linux</strong> — <i>монолитное</i>, оно состоит из одного файла, а для расширения его функциональности можно использовать модули.
+                </p>
+                <img src="misc/LinuxK.jpg" id="step_3_pic_1"/>
+            </div>
+
+            <div id="step_4" class="step box" data-x="0" data-y="3000" data-z="0" data-rotate-x="-235">
+                <h1><strong><code>Kernel</code></strong></h1>
+                <p>
+                     В <strong>Windows</strong> же используется <i>гибридное</i> ядро, которое состоит из множества небольших частей — библиотек <code>dll</code>, каждая из которых отвечает строго за свою функцию.
+                </p>
+                <img src="misc/WinK.jpg" id="step_4_pic_1"/>
+                <p>
+                    Но и это еще не все,<br> системные вызовы не<br> используются, вместо них<br> пользовательские<br> программы вынуждены<br> обращаться к<br> документированным<br> библиотекам.
+                </p>
+            </div>
+
+            
+            <div id="step_5" class="step box" data-x="1350" data-y="2450" data-z="-50" data-rotate-x="-270">
+                <h1><strong><code>Файловая система</code></strong></h1>
+                <span class="centrespan">
+                    Главным различием структуры файловых систем является их <i>"прозрачность"</i>.
+                </span>
+            </div>
+
+            <div id="step_6" class="step box" data-x="2500" data-y="2450" data-z="-50" data-rotate-x="-270">
+                <p>
+                    Linux предоставляет файловую систему более реально, такой как она есть на самом деле. Начинается структура файловой системы с <strong>корня</strong>, или, другими словами, основного каталога системного раздела, а уже туда подключаются все другие диски по нужных подкаталогах.
+                </p>
+                <img src="misc/LinuxFileSys.jpg" id="step_6_pic_1"/>
+            </div>
+
+            <div id="step_7" class="step box" data-x="2500" data-y="1550" data-z="150" data-rotate-x="-180">
+                <p>
+                    Windows создает <strong>дополнительную абстракцию</strong>. Хотя диски и разделы именуются похожим образом, как и в Linux, но все это скрыто операционной системой. Пользователю же предоставляется такая абстракция, как диск <kbd>C:, D:, E:, F:</kbd> и так далее.
+                </p>
+                <img src="misc/WinFileSys.jpg" id="step_7_pic_1"/>
+            </div>
+
+            <div id="step_8" class="step box" data-x="1350" data-y="1550" data-z="150" data-rotate-x="-180">
+                <h1><strong><code>Безопасность</code></strong></h1>
+                <span class="centrespan">
+                    Особенности строения Linux делают возможным только точечное, намеренное заражение и <i>исключают возможность</i> масштабной жизнедеятельности вредоносных программ, в то время как для Windows создано огромное число вирусов, число которых исчисляется <i>десятками миллионов</i>.
+                </span>
+            </div>
+
+            <div id="step_9" class="step box" data-x="1350" data-y="650" data-z="150" data-rotate-x="-180">
+                <h1><strong><code>GUI</code></strong></h1>
+                <p>
+                    В ОС Windows графическая среда пользователя является <i>неотъемлемой</i> частью ОС — консольный режим попросту <i>не существует</i>.
+                </p>
+                <img src="misc/Win10GUI.jpg" id="step_9_pic_1"/>
+            </div>
+
+            <div id="step_10" class="step box" data-x="1350" data-y="-250" data-z="150" data-rotate-x="-180">
+                <span class="centrespan">
+                    В это же время GNU/Linux это ОС текстового режима и графическая среда это отдельный программный продукт. Программ, которые реализуют графическую среду множество, из наиболее широко используемые — <kbd>GNOME</kbd>, <kbd>KDE</kbd> и <kbd>XFCE</kbd>.
+                </span>
+            </div>
+
+            <!-- примеры с Manjaro с прошлой презентации -->
+            <div id="step_11" class="step box" data-x="2500" data-y="-250" data-z="75" data-rotate-x="-180">
+                <p>
+                    <h1><strong class="anim-rotate"><i>GNOME</i></strong></h1>
+                </p>
+                <p></p>
+                <img src="misc/DE_GNOME_wiki.jpg" id="step_11_pic_1"/>
+            </div>
+
+            <div id="step_12" class="step box" data-x="3650" data-y="-250" data-z="75" data-rotate-x="-180">
+                <p>
+                    <h1><strong class="anim-rotate"><i>KDE</i></strong></h1>
+                </p>
+                <p></p>
+                <img src="misc/DE_KDEPlasma_wiki.png" id="step_12_pic_1"/>
+            </div>
+
+            <div id="step_13" class="step box" data-x="4800" data-y="-250" data-z="75" data-rotate-x="-180">
+                <p>
+                    <h1><strong class="anim-rotate"><i>XFCE</i></strong></h1>
+                </p>
+                <p></p>
+                <img src="misc/DE_XFCE_wiki.png" id="step_13_pic_1"/>
+            </div>
+
+            <div id="step_14" class="step box" data-x="4000" data-y="-1150" data-z="150" data-rotate-x="-180">
+                <h1><strong><code>Обновление</code></strong></h1>
+                <p>
+                    Использование <i>централизованных репозиториев</i> в Linux дает большую безопасность и надежность, а также возможность обновления. Как только новая версия программы появилась в репозитории, вы можете ее обновить.<br><br><br>
+                </p>
+                <p>
+                    В Windows нет репозиториев, вам придется искать все необходимые программы в интернете и устанавливать их <i>вручную</i>. Каждая программа будет обновляться сама, когда будет считать нужным, в том числе и система.
+                </p>
+            </div>
+
+            <div id="step_15" class="step box" data-x="5600" data-y="-1150" data-z="150" data-rotate-x="-180">
+                <h1><strong><code>Поддержка и совместимость</code></strong></h1>
+                <p>
+                    Для Microsoft Windows из-за <i>монопольной позиции</i> и результирующего большого процента рынка постоянно выпускается огромное количество ПО.
+                </p>
+
+                <p> Более того, если речь идет о "программах-лидерах" в своих прикладных областях, то под ОС Linux нет <i>ни соответствующих версий этих программ, ни полноценных аналогов</i>.<br>
+                    <br>Частично этот недостаток можно компенсировать за счет эмуляторов и приложений на уровне <strong>WINE</strong>.</p>
+                <img src="misc/WINE-Logo.png" id="step_15_pic_1"/>
+            </div>
+
+        </div>
+
+        <script src="js/impress.js"></script>
+        <script>
+            impress().init();
+        </script>
+    </body>
+</html>
