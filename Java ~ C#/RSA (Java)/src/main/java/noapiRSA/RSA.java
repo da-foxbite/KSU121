@@ -73,10 +73,13 @@ public class RSA {
         System.out.println("Текст:              " + teststring);
         
         //вывод в любой форме кроме итоговой для наглядности
-        System.out.println("\nТекст, ASCII:       " + Arrays.toString(teststring.getBytes()));
+        // System.out.println("\nТекст, ASCII:       " + Arrays.toString(teststring.getBytes()));
         
         byte[] encrypted = rsa.encrypt(teststring.getBytes());
         byte[] decrypted = rsa.decrypt(encrypted);
+        
+        System.out.println("Текст зашифрован:  " + encrypted); // random не изменяется?
+        System.out.println("Текст зашифрован:  " + Arrays.toString(encrypted)); // 
         
         System.out.println("Текст расшифрован:  " + new String(decrypted));
     }
