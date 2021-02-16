@@ -6,20 +6,19 @@
 	Код SMALLINT(4) NOT NULL UNIQUE,
 	Новинка VARCHAR(3) NOT NULL DEFAULT 'No',
 	Назва VARCHAR(255) NOT NULL,
-	Цiна FLOAT(8) NOT NULL,
+	Цiна FLOAT(6,2) NOT NULL,
 	Видавництво VARCHAR(255) NOT NULL,
 	Сторiнки SMALLINT(4) DEFAULT NULL,
 	Формат VARCHAR(20) DEFAULT NULL,
-	Дата DATE,
-	
-	Тираж INT(10) DEFAULT 5000,
+	Дата DATE,	
+	Тираж INT(10) DEFAULT 50000 CHECK (Тираж=50000),
 	Тема VARCHAR(255) DEFAULT NULL,
 	Категорiя VARCHAR(255) DEFAULT NULL,
 	
 	PRIMARY KEY(N)
-	)
+	);
 	
-   d) CREATE INDEX indx_test ON table_1(Назва);
+   d) CREATE INDEX indx_test ON table_1(Назва); // тестовый, не сработает, одинаковые названия
    e) INSERT INTO table_1 (N, Код, Новинка, Назва, Цiна, Видавництво, Сторiнки, Формат, Дата, Тираж, Тема, Категорiя)
 		VALUES (2, 5210, 'No', 'Аппаратные средства мультимедия. Видеосистема РС', 15.51, 'BHV С.-Петербург', 400, '70х100/16', DATE('2000-07-24'), 50000,'Використання ПК в цілому', 'Підручники'),
 		(8, 4895, 'No', 'Освой самостоятельно модернизацию и ремонт ПК за 24 часа, 2-е изд.', 18.90, 'Вильямс', 288, '70х100/16', DATE('2000-07-07'), 50000,'Використання ПК в цілому', 'Підручники'),
@@ -42,8 +41,8 @@
 
    
 3. a) ALTER TABLE table_1 ADD Автор VARCHAR(15);
-   b)  ALTER TABLE table_1 MODIFY COLUMN `Автор` VARCHAR(20);
+   b) ALTER TABLE table_1 MODIFY COLUMN `Автор` VARCHAR(20);
    c) ALTER TABLE table_1 DROP COLUMN `Автор`;
    
-   d) CREATE UNIQUE INDEX indx_test ON table_1(Назва); // Поля с одинаковыми полями уже есть поэтому не работает? (#1062 - Дублирующаяся запись 'Аппаратные средства мультимедия....' по ключу 'indxtest')
    e) DROP INDEX indx_test ON table_1;
+   d) CREATE UNIQUE INDEX indx_test ON table_1(Код DESC);
