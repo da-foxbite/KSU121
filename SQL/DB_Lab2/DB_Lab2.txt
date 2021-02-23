@@ -28,10 +28,10 @@
 	SELECT * FROM `table_1` WHERE Сторiнки BETWEEN 300 AND 400 AND Цiна BETWEEN 20 and 30
 
 11. Вивести всі книги видані взимку 2000 року : 
-	SELECT * FROM `table_1` WHERE Дата BETWEEN CAST('2000-01-01' AS DATE) AND CAST('2000-02-29' AS DATE) 
+	SELECT * FROM `table_1` WHERE Дата BETWEEN CAST('2000-01-01' AS DATE) AND CAST('2000-02-29' AS DATE) OR Дата BETWEEN CAST('2000-12-01' AS DATE) AND CAST('2000-12-31' AS DATE) 
 
 12. Вивести книги зі значеннями кодів 5110, 5141, 4985, 4241 : 
-	SELECT * FROM `table_1` Код=5110 OR Код=5141 OR Код=4985 OR Код=4241
+	SELECT * FROM `table_1` WHERE Код=5110 OR Код=5141 OR Код=4985 OR Код=4241
 
 13. Вивести книги видані в 1999, 2001, 2003, 2005 р : 
 	SELECT * FROM `table_1` WHERE Дата LIKE '1999%' OR Дата LIKE '2001%' OR Дата LIKE '2003%' OR Дата LIKE '2005%'
