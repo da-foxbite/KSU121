@@ -31,7 +31,7 @@
 	SELECT * FROM `table_1` WHERE Дата BETWEEN CAST('2000-01-01' AS DATE) AND CAST('2000-02-29' AS DATE) OR Дата BETWEEN CAST('2000-12-01' AS DATE) AND CAST('2000-12-31' AS DATE) 
 
 12. Вивести книги зі значеннями кодів 5110, 5141, 4985, 4241 : 
-	SELECT * FROM `table_1` WHERE Код=5110 OR Код=5141 OR Код=4985 OR Код=4241
+	SELECT * FROM `table_1` WHERE Код=5110 OR Код=5141 OR Код=4985 OR Код=4241 
 
 13. Вивести книги видані в 1999, 2001, 2003, 2005 р : 
 	SELECT * FROM `table_1` WHERE Дата LIKE '1999%' OR Дата LIKE '2001%' OR Дата LIKE '2003%' OR Дата LIKE '2005%'
@@ -52,8 +52,9 @@
 	SELECT * FROM `table_1` WHERE Назва RLIKE '[0-9]'
 
 19. Вивести книги, в назвах яких присутні не менше трьох цифр. : 
-	SELECT * FROM `table_1` WHERE Назва RLIKE '.*[0-9].*[0-9].*[0-9].*'
+	SELECT * FROM `table_1` WHERE Назва RLIKE '[0-9]{3}' 
+	// '.*[0-9].*[0-9].*[0-9].*'
 
 20. Вивести книги, в назвах яких присутній рівно п'ять цифр : 
-	SELECT * FROM `table_1` WHERE Назва RLIKE '.*[0-9].*[0-9].*[0-9].*[0-9].*[0-9].*' AND Назва NOT RLIKE '.*[0-9].*[0-9].*[0-9].*[0-9].*[0-9].*[0-9].*' 
+	SELECT * FROM `table_1` WHERE Назва RLIKE '[0-9]{5}' AND Назва NOT RLIKE '[0-9]{6}' 
 
