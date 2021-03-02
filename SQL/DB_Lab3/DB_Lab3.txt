@@ -1,17 +1,17 @@
 1. Вивести книги у яких не введена ціна або ціна дорівнює 0 : 
-	SELECT * FROM `table_1` WHERE Цiна=NULL OR Цiна=0.00
-	// =NULL или <=>NULL ?
+	SELECT * FROM `table_1` WHERE Цiна<=>NULL OR Цiна=0.00
 
 2. Вивести книги у яких введена ціна, але не введений тираж : 
-	SELECT * FROM `table_1` WHERE Цiна<>NULL AND Тираж=NULL
+	SELECT * FROM `table_1` WHERE Цiна IS NOT NULL AND Тираж<=>NULL
+	// Тираж<=>NULL или Тираж IS NULL
+	// SELECT * FROM `table_1` WHERE Цiна<>NULL AND Тираж<=>NULL не работает
 
 3. Вивести книги, про дату видання яких нічого не відомо : 
-	SELECT * FROM `table_1` WHERE Дата=NULL
+	SELECT * FROM `table_1` WHERE Дата<=>NULL
 
 4. Вивести книги, з дня видання яких пройшло не більше року : 
-	SELECT * FROM `table_1` YEAR(CURRENT_DATE)-YEAR(Дата)<=1
-	// ABS(YEAR(CURRENT_DATE)-YEAR(Дата)) ?
-	// не работает
+	SELECT * FROM `table_1` WHERE YEAR(CURRENT_DATE)-YEAR(Дата)<=1
+	// SELECT * FROM `table_1` WHERE YEAR('2000-06-06')-YEAR(Дата)<=1 тест, возвращает
 
 5. Вивести список книг-новинок, відсортованих за зростанням ціни : 
 	SELECT * FROM `table_1` WHERE Новинка='Yes' ORDER BY Цiна ASC
@@ -28,7 +28,7 @@
 9. Вивести книги, у яких ціна однієї сторінки < 10 копійок : 
 	SELECT * FROM `table_1` WHERE (Цiна*28.01)/Сторiнки<0.10
 	// (Цiна*28.01)/CAST(Сторiнки AS FLOAT)<0.10 
-	// Цiна/Сторiнки<0.10 цент?
+	// Цiна/Сторiнки<0.10 тест, в центах, возвращает
 
 10. Вивести значення наступних колонок: число символів в назві, перші 20 символів назви великими літерами : 
 	SELECT LENGTH(Назва) AS `Число символів`, UPPER(LEFT(Назва, 20)) AS `Першi 20 символiв` FROM `table_1` 
@@ -61,10 +61,8 @@
 	DELETE FROM `table_1` WHERE YEAR(Дата)<1990
 
 19. Проставити поточну дату для тих книг, у яких дата видання відсутня : 
-	UPDATE `table_1` SET `Дата`=CURRENT_DATE WHERE Дата=NULL
-	// не работает
+	UPDATE `table_1` SET `Дата`=CURRENT_DATE WHERE Дата<=>NULL
 
 20. Установити ознаку новинка для книг виданих після 2005 року : 
 	UPDATE `table_1` SET `Новинка`='Yes' WHERE YEAR(Дата)>2005
-	// не работает
 
