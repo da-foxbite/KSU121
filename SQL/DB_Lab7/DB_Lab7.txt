@@ -43,13 +43,12 @@ CALL GetInfo_4;
 5.	Вивести середню вартість книг по темі 'Використання ПК' і категорії 'Linux' :
 DROP PROCEDURE IF EXISTS GetInfo_5;
 DELIMITER //
-CREATE PROCEDURE GetInfo_5(top_id int, cat_id int, OUT count int)
+CREATE PROCEDURE GetInfo_5(top_id int, cat_id int)
 BEGIN
-	SELECT AVG(Цiна) INTO count FROM table_1 WHERE table_1.Тема_ID = top_id AND table_1.Категорiя_ID = cat_id;
+	SELECT AVG(Цiна) as `Середня вартість` FROM table_1 WHERE table_1.Тема_ID = top_id AND table_1.Категорiя_ID = cat_id;
 END //
 DELIMITER ;
-CALL GetInfo_5(2, 5, @count);
-SELECT @count as Результат;
+CALL GetInfo_5(2, 7);
 
 // пустой, нет соответствующих пар
 
