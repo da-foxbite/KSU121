@@ -1,0 +1,175 @@
+1.	Вивести значення наступних колонок: назва книги, ціна, назва видавництва, формат :
+DROP PROCEDURE IF EXISTS GetInfo_1;
+DELIMITER //
+CREATE PROCEDURE GetInfo_1()
+BEGIN
+	SELECT Назва, Цiна, Видавцi.Видавництво, Формати.Формат FROM table_1 JOIN Видавцi
+	ON table_1.Видавництво_ID = Видавцi.Видавництво_ID JOIN Формати ON Формати.Формат_ID = table_1.Формат_ID;
+END //
+DELIMITER ;
+CALL GetInfo_1;
+
+2.	Вивести значення наступних колонок: тема, категорія, назва книги, назва видавництва. Фільтр по темам і категоріям :
+DROP PROCEDURE IF EXISTS GetInfo_2;
+DELIMITER //
+CREATE PROCEDURE GetInfo_2()
+BEGIN
+	SELECT Назва, Цiна, Видавцi.Видавництво, Теми.Тема, Категорiї.Категорiя FROM table_1 JOIN Видавцi
+	ON table_1.Видавництво_ID = Видавцi.Видавництво_ID JOIN Теми ON table_1.Тема_ID = Теми.Тема_ID JOIN Категорiї ON Категорiї.Категорiя_ID = table_1.Категорiя_ID;
+END //
+DELIMITER ;
+CALL GetInfo_2;
+
+3.	Вивести книги видавництва 'BHV', видані після 2000 р :
+DROP PROCEDURE IF EXISTS GetInfo_3;
+DELIMITER //
+CREATE PROCEDURE GetInfo_3(p_id int, y_num int)
+BEGIN
+	SELECT * FROM table_1 WHERE Видавництво_ID = p_id AND YEAR(Дата) > y_num;
+END //
+DELIMITER ;
+CALL GetInfo_3(2, 2000);
+
+4.	Вивести загальну кількість сторінок по кожній назві категорії. Фільтр по спадаючій / зростанню кількості сторінок :
+DROP PROCEDURE IF EXISTS GetInfo_4;
+DELIMITER //
+CREATE PROCEDURE GetInfo_4()
+BEGIN
+	SELECT Категорiї.Категорiя, SUM(Сторiнки) FROM table_1 JOIN Категорiї ON table_1.Категорiя_ID = Категорiї.Категорiя_ID GROUP BY table_1.Категорiя_ID ORDER BY Сторiнки;
+END //
+DELIMITER ;
+CALL GetInfo_4;
+
+5.	Вивести середню вартість книг по темі 'Використання ПК' і категорії 'Linux' :
+DROP PROCEDURE IF EXISTS GetInfo_5;
+DELIMITER //
+CREATE PROCEDURE GetInfo_5(top_id int, cat_id int, OUT count int)
+BEGIN
+	SELECT AVG(Цiна) INTO count FROM table_1 WHERE table_1.Тема_ID = top_id AND table_1.Категорiя_ID = cat_id;
+END //
+DELIMITER ;
+CALL GetInfo_5(2, 5, @count);
+SELECT @count as Результат;
+
+// пустой, нет соответствующих пар
+
+6.	Вивести всі дані універсального відношення :
+DROP PROCEDURE IF EXISTS GetInfo_6;
+DELIMITER //
+CREATE PROCEDURE GetInfo_6()
+BEGIN
+	SELECT table_1.*, Видавцi.Видавництво, Категорiї.Категорiя, Формати.Формат, Теми.Тема FROM table_1
+	LEFT JOIN Видавцi ON Видавцi.Видавництво_ID = table_1.Видавництво_ID LEFT JOIN Категорiї ON Категорiї.Категорiя_ID = table_1.Категорiя_ID LEFT JOIN Теми ON Теми.Тема_ID = table_1.Тема_ID LEFT JOIN Формати ON Формати.Формат_ID = table_1.Формат_ID;
+END //
+DELIMITER ;
+CALL GetInfo_6;
+
+7.	Вивести пари книг, що мають однакову кількість сторінок :
+DROP PROCEDURE IF EXISTS GetInfo_7;
+DELIMITER //
+CREATE PROCEDURE GetInfo_7()
+BEGIN
+	SELECT DISTINCT tb1.Назва 'Назва_1', tb2.Назва 'Назва_2' FROM table_1 tb1 
+	JOIN table_1 tb2 ON tb1.Сторiнки = tb2.Сторiнки AND tb1.N != tb2.N;
+END //
+DELIMITER ;
+CALL GetInfo_7;
+
+8.	Вивести тріади книг, що мають однакову ціну :
+DROP PROCEDURE IF EXISTS GetInfo_8;
+DELIMITER //
+CREATE PROCEDURE GetInfo_8()
+
+// для видимости
+BEGIN
+	INSERT INTO `table_1` (`N`, `Код`, `Новинка`, `Назва`, `Цiна`, `Видавництво_ID`, `Сторiнки`, `Формат_ID`, `Дата`, `Тираж`, `Тема_ID`, `Категорiя_ID`) VALUES
+		(230, 1495, 'Yes', 'Порожня_книга_1', 5.30, 11, NULL, 1, '2021-04-09', NULL, 1, 1),
+		(231, 1496, 'Yes', 'Порожня_книга_2', 5.30, 11, NULL, 1, '2021-04-10', NULL, 1, 1),
+		(232, 1497, 'Yes', 'Порожня_книга_3', 5.30, 11, NULL, 1, '2021-04-11', NULL, 1, 1),
+		(233, 1498, 'Yes', 'Порожня_книга_4', 5.30, 11, NULL, 1, '2021-04-12', NULL, 1, 1),
+		(234, 1499, 'Yes', 'Порожня_книга_5', 5.30, 11, NULL, 1, '2021-04-13', NULL, 1, 1);
+	
+	SELECT DISTINCT tab1.Назва 'Назва_1', tab2.Назва 'Назва_2', tab3.Назва 'Назва_3' FROM table_1 tab1 
+	JOIN table_1 tab2 ON tab1.Цiна = tab2.Цiна AND tab1.N != tab2.N 
+	JOIN table_1 tab3 ON tab1.Цiна = tab3.Цiна AND tab1.N != tab3.N;
+	
+	DELETE FROM table_1 WHERE N BETWEEN 230 AND 234;
+END //
+DELIMITER ;
+CALL GetInfo_8;
+
+9.	Вивести всі книги категорії 'C ++' :
+DROP PROCEDURE IF EXISTS GetInfo_9;
+DELIMITER //
+CREATE PROCEDURE GetInfo_9(cat_id int)
+BEGIN
+	SELECT * from table_1 WHERE Категорiя_ID = cat_id;
+END //
+DELIMITER ;
+CALL GetInfo_9(10);
+
+10.	Вивести список видавництв, у яких розмір книг перевищує 400 сторінок :
+DROP PROCEDURE IF EXISTS GetInfo_10;
+DELIMITER //
+CREATE PROCEDURE GetInfo_10(min_pages int)
+BEGIN
+	SELECT * FROM Видавцi WHERE (SELECT MIN(Сторiнки) FROM table_1 WHERE table_1.Видавництво_ID = Видавцi.Видавництво_ID) > min_pages;
+END //
+DELIMITER ;
+CALL GetInfo_10(400);
+
+11.	Вивести список категорій за якими більше 3-х книг :
+DROP PROCEDURE IF EXISTS GetInfo_11;
+DELIMITER //
+CREATE PROCEDURE GetInfo_11(min_books int)
+BEGIN
+	SELECT * FROM Категорiї WHERE (SELECT COUNT(*) FROM table_1 WHERE table_1.Категорiя_ID = Категорiї.Категорiя_ID) > min_books;
+END //
+DELIMITER ;
+CALL GetInfo_11(3);
+
+12.	Вивести список книг видавництва 'BHV', якщо в списку є хоча б одна книга цього видавництва :
+DROP PROCEDURE IF EXISTS GetInfo_12;
+DELIMITER //
+CREATE PROCEDURE GetInfo_12(p_name varchar(255))
+BEGIN
+	SELECT * FROM table_1 WHERE EXISTS (SELECT * FROM Видавцi WHERE Видавцi.Видавництво = p_name AND Видавцi.Видавництво_ID = table_1.Видавництво_ID);
+END //
+DELIMITER ;
+CALL GetInfo_12('BHV С.-Петербург');
+
+13.	Вивести список книг видавництва 'BHV', якщо в списку немає жодної книги цього видавництва :
+DROP PROCEDURE IF EXISTS GetInfo_13;
+DELIMITER //
+CREATE PROCEDURE GetInfo_13(p_name varchar(255))
+BEGIN
+	SELECT * FROM table_1 WHERE NOT EXISTS (SELECT * FROM Видавцi WHERE Видавцi.Видавництво = p_name AND Видавцi.Видавництво_ID = table_1.Видавництво_ID)
+	AND Видавництво_ID = (SELECT Видавцi.Видавництво_ID FROM Видавцi WHERE Видавцi.Видавництво = p_name);
+END //
+DELIMITER ;
+CALL GetInfo_13('BHV С.-Петербург');
+
+//противоречит сам себе?; пустой
+
+14.	Вивести відсортоване загальний список назв тем і категорій :
+DROP PROCEDURE IF EXISTS GetInfo_14;
+DELIMITER //
+CREATE PROCEDURE GetInfo_14()
+BEGIN
+	((SELECT Тема AS `tmp` FROM Теми) UNION (SELECT Категорiя AS `tmp` FROM Категорiї)) ORDER BY tmp;
+END //
+DELIMITER ;
+CALL GetInfo_14();
+
+// сортирует кириллическую І некорректно 
+
+15.	Вивести відсортований в зворотному порядку загальний список перших слів назв книг і категорій що не повторюються :
+DROP PROCEDURE IF EXISTS GetInfo_15;
+DELIMITER //
+CREATE PROCEDURE GetInfo_15()
+BEGIN
+	SELECT DISTINCT name FROM ((SELECT REGEXP_SUBSTR(TRIM(Назва), '^[^\\s]+') AS name FROM table_1) UNION ALL(SELECT REGEXP_SUBSTR(TRIM(Категорiя), '^[^\\s]+') as name FROM Категорiї)) names 
+	ORDER BY name DESC;
+END //
+DELIMITER ;
+CALL GetInfo_15();
