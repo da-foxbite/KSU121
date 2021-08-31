@@ -1,0 +1,244 @@
+БД картотеки библиотеки (библиотека - карточка книги - издательство - город - тема книги - дисциплина - список выборки книги по дисциплине - позиции выборки)
+
+1) Таблицы: Main + Publisher, Format, Topic, Discipline
+2) Процедуры: 
+	 Show_All, Show_All_2 => Выборка из всех таблиц ((Все данные))
+	 ShowAll_IDs => Выборка из главной таблицы ((Поля с ID))
+	 Show_ID => Выборка данных по одной книге (По ID)
+	 Show_Until => Выборка определённого числа строк (от X do Y)
+	 GetDisc_ID => Выборка книг одной дисциплины (По ID)
+	+GetDisc_Name => Выборка книг одной дисциплины (По названию)
+	 DiscNum => Таблица количества книг по дисциплине
+	 DiscNum_ID => Количество книг одной дисциплины (По ID)
+	 DiscNum_NAME => Количество книг одной дисциплины (По названию)
+3) Триггеры: 
+	 TriggerNA => Реагирует на регистрацию книги с издательством/форматом/темой/дисциплиной под ID "n/a"
+4) Пользовательские функции: 
+	 FuncPageSUM => Сума кількості сторінок
+
+DROP DATABASE IF EXISTS CardIndexBD;
+CREATE DATABASE IF NOT EXISTS CardIndexBD;
+
+CREATE TABLE CardIn_Main(
+	ID SMALLINT(3) NOT NULL UNIQUE AUTO_INCREMENT,
+	Title varchar(255) NOT NULL DEFAULT '',
+	Publisher_ID SMALLINT(2),
+	Pages SMALLINT(4) DEFAULT NULL,
+	Format_ID SMALLINT(2),
+	Topic_ID SMALLINT(3),
+	Discipline_ID SMALLINT(3),
+	
+	PRIMARY KEY(ID)
+);
+CREATE TABLE CardIn_Publisher(
+	Publisher_ID SMALLINT(3) NOT NULL UNIQUE AUTO_INCREMENT,
+    Publisher_Name VARCHAR(50) UNIQUE NOT NULL,
+    Publisher_City VARCHAR(30) NOT NULL DEFAULT '',	
+	
+	PRIMARY KEY(Publisher_ID)
+);
+ALTER TABLE CardIn_Main ADD FOREIGN KEY (Publisher_ID) REFERENCES CardIn_Publisher(Publisher_ID);
+INSERT INTO CardIn_Publisher(Publisher_Name, Publisher_City) VALUES 
+  ('n/a', ''),
+  ('Книголав', 'Київ'),
+  ('Абабагаламага', 'Київ'),
+  ('Фоліо', 'Харків'),
+  ('Алерта', 'Київ'),
+  ('Комора', 'Київ'),
+  ('КСД', 'Харків');
+
+
+CREATE TABLE CardIn_Format(
+    Format_ID SMALLINT(2) NOT NULL UNIQUE AUTO_INCREMENT,
+    Format_Name VARCHAR(15) UNIQUE NOT NULL,
+	
+	PRIMARY KEY(Format_ID)
+);
+ALTER TABLE CardIn_Main ADD FOREIGN KEY (Format_ID) REFERENCES CardIn_Format(Format_ID);
+INSERT INTO CardIn_Format(Format_Name) VALUES 
+  ('n/a'),
+  ('70×90/16'),
+  ('70×100/16'),
+  ('70×108/16'),
+  ('84х108/16'),
+  ('84х108/32'),
+  ('60х84/16');
+
+CREATE TABLE CardIn_Topic(
+    Topic_ID SMALLINT(3) NOT NULL UNIQUE AUTO_INCREMENT,
+    Topic_Name VARCHAR(50) UNIQUE NOT NULL,
+	
+	PRIMARY KEY(Topic_ID)
+);
+ALTER TABLE CardIn_Main ADD FOREIGN KEY (Topic_ID) REFERENCES CardIn_Topic(Topic_ID);
+INSERT INTO CardIn_Topic(Topic_Name) VALUES 
+  ('n/a'),
+  ('Лірична поєзія'),
+  ('Філософські роздуми'),
+  ('Мандри'),
+  ('Фентезі'),
+  ('Пригоди'),
+  ('Історія України'),
+  ('Закон та право');
+
+CREATE TABLE CardIn_Discipline(
+    Discipline_ID SMALLINT(3) NOT NULL UNIQUE AUTO_INCREMENT,
+    Discipline_Name VARCHAR(30) UNIQUE NOT NULL,
+	
+	PRIMARY KEY(Discipline_ID)
+);
+ALTER TABLE CardIn_Main ADD FOREIGN KEY (Discipline_ID) REFERENCES CardIn_Discipline(Discipline_ID);
+INSERT INTO CardIn_Discipline(Discipline_Name) VALUES 
+  ('n/a'),
+  ('Література'),
+  ('Історія'),
+  ('Філософія'),
+  ('Краєзнавство'),
+  ('Правознавство');
+  
+INSERT INTO CardIn_Main (Title, Publisher_ID, Pages, Format_ID, Topic_ID, Discipline_ID) VALUES
+('Робінзон Крузо', 2, 272, 3, 6, 2),
+('Камяне обличчя, чорне серце. Азіатська філософія перемог без поразок', 7, 272, 5, 3, 4),
+('Короткий курс історії України', 3, 464, 6, 7, 3),
+('Кандід', 4, 412, 2, 3, 4),
+('Проби', 4, 443, 2, 3, 4),
+('Шерлок Голмс. Повне видання у 2 томах. Том 1', 3, 768, 3, 6, 2),
+('Шерлок Голмс. Повне видання у 2 томах. Том 2', 3, 720, 3, 6, 2),
+('Філософія української ідеї та європейський контекст. Франківський період', 6, 192, 5, 3, 4),
+('Сад божественных песней', 4, 287, 2, 3, 4),
+('История Киева. Книга 1. Киев руський', 4, 448, 7, 7, 3),
+('Мысли', 4, 256, 2, 3, 4),
+('Гаррі Поттер і філософський камінь', 3, 320, 7, 5, 2),
+('Маруся Чурай', 3, 224, 7, 6, 2),
+('Історія України. Навчальний посібник', 5, 352, 4, 7, 3),
+('Львівщина', 4, 219, 3, 4, 5),
+('Замки Тернопільщини', 4, 96, 3, 4, 5),
+('Задивляюсь у твої зіниці', 3, 208, 3, 2, 2),
+('Стежками Карпат. 80 маршрутів в Українських Карпатах', 4, 512, 3, 4, 5),
+('Сімейне право України', 5, 512, 4, 8, 6),
+('Кримінальний процесуальний кодекс України. Станом на 10.03.2020', 5, 324, 4, 8, 6),
+('Кайдашева сімя', 7, 320, 4, 6, 2);
+
+
+DROP PROCEDURE IF EXISTS Show_All;
+CREATE PROCEDURE Show_All()
+SELECT CardIn_Main.ID, CardIn_Main.Title AS 'Назва', CardIn_Main.Pages AS 'Сторінки',  CardIn_Format.Format_Name AS 'Формат', CardIn_Publisher.Publisher_Name AS 'Видавець', CardIn_Publisher.Publisher_City AS 'Місто видання', CardIn_Topic.Topic_Name AS 'Тема', CardIn_Discipline.Discipline_Name AS 'Дисципліна' FROM CardIn_Main, CardIn_Publisher, CardIn_Format, CardIn_Topic, CardIn_Discipline WHERE CardIn_Main.Publisher_ID=CardIn_Publisher.Publisher_ID AND CardIn_Main.Format_ID=CardIn_Format.Format_ID AND CardIn_Main.Topic_ID=CardIn_Topic.Topic_ID AND CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID GROUP BY CardIn_Main.ID; 
+
+DROP PROCEDURE IF EXISTS Show_All_2;
+DELIMITER //
+CREATE PROCEDURE Show_All_2()
+BEGIN
+	SELECT CardIn_Main.ID, CardIn_Main.Title AS 'Назва', CardIn_Main.Pages AS 'Сторінки',  CardIn_Format.Format_Name AS 'Формат', CardIn_Publisher.Publisher_Name AS 'Видавець', CardIn_Publisher.Publisher_City AS 'Місто видання', CardIn_Topic.Topic_Name AS 'Тема', CardIn_Discipline.Discipline_Name AS 'Дисципліна'
+	FROM CardIn_Main JOIN CardIn_Publisher ON CardIn_Main.Publisher_ID=CardIn_Publisher.Publisher_ID JOIN CardIn_Format ON CardIn_Main.Format_ID=CardIn_Format.Format_ID JOIN CardIn_Topic ON CardIn_Main.Topic_ID=CardIn_Topic.Topic_ID JOIN CardIn_Discipline ON CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID
+	GROUP BY CardIn_Main.ID;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS Show_ID;
+DELIMITER //
+CREATE PROCEDURE Show_ID(book_id int)
+BEGIN
+	SELECT CardIn_Main.ID, CardIn_Main.Title AS 'Назва', CardIn_Main.Pages AS 'Сторінки',  CardIn_Format.Format_Name AS 'Формат', CardIn_Publisher.Publisher_Name AS 'Видавець', CardIn_Publisher.Publisher_City AS 'Місто видання', CardIn_Topic.Topic_Name AS 'Тема', CardIn_Discipline.Discipline_Name AS 'Дисципліна' FROM CardIn_Main, CardIn_Publisher, CardIn_Format, CardIn_Topic, CardIn_Discipline WHERE CardIn_Main.Publisher_ID=CardIn_Publisher.Publisher_ID AND CardIn_Main.Format_ID=CardIn_Format.Format_ID AND CardIn_Main.Topic_ID=CardIn_Topic.Topic_ID AND CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID AND CardIn_Main.ID=book_id GROUP BY CardIn_Main.ID; 
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS Show_Until;
+DELIMITER //
+CREATE PROCEDURE Show_Until(A int, N int)
+BEGIN
+	SELECT CardIn_Main.ID, CardIn_Main.Title AS 'Назва', CardIn_Main.Pages AS 'Сторінки',  CardIn_Format.Format_Name AS 'Формат', CardIn_Publisher.Publisher_Name AS 'Видавець', CardIn_Publisher.Publisher_City AS 'Місто видання', CardIn_Topic.Topic_Name AS 'Тема', CardIn_Discipline.Discipline_Name AS 'Дисципліна' FROM CardIn_Main, CardIn_Publisher, CardIn_Format, CardIn_Topic, CardIn_Discipline 
+	WHERE CardIn_Main.Publisher_ID=CardIn_Publisher.Publisher_ID AND CardIn_Main.Format_ID=CardIn_Format.Format_ID AND CardIn_Main.Topic_ID=CardIn_Topic.Topic_ID AND CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID
+	GROUP BY CardIn_Main.ID LIMIT A, N; 
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS ShowAll_IDs;
+DELIMITER //
+CREATE PROCEDURE ShowAll_IDs()
+BEGIN
+	SELECT ID AS 'ID Книги', Publisher_ID AS 'ID Видавця', Format_ID AS 'ID Формата', Topic_ID AS 'ID Теми', Discipline_ID AS 'ID Дісципліни' FROM CardIn_Main GROUP BY CardIn_Main.ID;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS GetDisc_ID;
+DELIMITER //
+CREATE PROCEDURE GetDisc_ID(disc_id int)
+BEGIN
+	SELECT CardIn_Main.ID, CardIn_Main.Title AS 'Назва', CardIn_Main.Pages AS 'Сторінки',  CardIn_Format.Format_Name AS 'Формат', CardIn_Publisher.Publisher_Name AS 'Видавець', CardIn_Publisher.Publisher_City AS 'Місто видання', CardIn_Topic.Topic_Name AS 'Тема', CardIn_Discipline.Discipline_Name AS 'Дисципліна' FROM CardIn_Main, CardIn_Publisher, CardIn_Format, CardIn_Topic, CardIn_Discipline WHERE CardIn_Main.Publisher_ID=CardIn_Publisher.Publisher_ID AND CardIn_Main.Format_ID=CardIn_Format.Format_ID AND CardIn_Main.Topic_ID=CardIn_Topic.Topic_ID AND CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID AND cardin_main.Discipline_ID = disc_id GROUP BY CardIn_Main.ID; 
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS DiscNum;
+DELIMITER //
+CREATE PROCEDURE DiscNum()
+BEGIN
+	SELECT CardIn_Discipline.Discipline_Name AS 'Назва дисципліни', COUNT(CardIn_Main.Discipline_ID) AS 'Кількість книжок' FROM CardIn_Main, CardIn_Discipline 
+	WHERE CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID GROUP BY CardIn_Main.Discipline_ID;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS DiscNum_ID;
+DELIMITER //
+CREATE PROCEDURE DiscNum_ID(DiscID int)
+BEGIN
+	SELECT CardIn_Discipline.Discipline_Name AS 'Назва дисципліни', COUNT(CardIn_Main.Discipline_ID) AS 'Кількість книжок' FROM CardIn_Main, CardIn_Discipline
+	WHERE CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID AND CardIn_Main.Discipline_ID=DiscID;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS DiscNum_NAME;
+DELIMITER //
+CREATE PROCEDURE DiscNum_NAME(IN DiscName VARCHAR(30))
+BEGIN
+	SELECT CardIn_Discipline.Discipline_Name AS 'Назва дисципліни', COUNT(CardIn_Main.Discipline_ID) AS 'Кількість книжок' FROM CardIn_Main, CardIn_Discipline
+	WHERE CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID AND CardIN_Discipline.Discipline_Name LIKE DiscName;
+END //
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS TriggerNA;
+DELIMITER $$
+CREATE TRIGGER TriggerNA BEFORE INSERT ON CardIn_Main FOR EACH ROW
+IF (NEW.Publisher_ID = 1)
+THEN 
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Відповідно заповніть поле Видавець.';
+ELSEIF (NEW.Format_ID = 1)
+THEN
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Відповідно заповніть поле Формат.';
+ELSEIF (NEW.Topic_ID = 1)
+THEN
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Відповідно заповніть поле Тема.';
+ELSEIF (NEW.Discipline_ID = 1)
+THEN
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Відповідно заповніть поле Дисципліна.';
+END IF $$
+
+DELIMITER ;
+
+[Альтернативний синтаксис] 
+IF (NEW.Publisher_ID = 1 OR NEW.Format_ID = 1 OR NEW.Topic_ID = 1 OR NEW.Discipline_ID = 1)
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Заповніть поля Видавець/Формат/Тема/Дісципліна відповідно.';
+
+
+DROP FUNCTION IF EXISTS FuncPageSUM;
+DELIMITER $$
+CREATE FUNCTION FuncPageSUM()
+	RETURNS INT
+    	BEGIN
+			RETURN (SELECT SUM(CardIn_Main.Pages) FROM CardIn_Main);
+END $$
+DELIMITER ;
+SELECT FuncPageSUM() AS `Кількість сторінок`;
+
++++
+DROP PROCEDURE IF EXISTS GetDisc_Name;
+DELIMITER //
+CREATE PROCEDURE GetDisc_Name(IN DisName VARCHAR(30))
+BEGIN
+	SELECT CardIn_Main.ID, CardIn_Main.Title AS 'Назва', CardIn_Main.Pages AS 'Сторінки',  CardIn_Format.Format_Name AS 'Формат', CardIn_Publisher.Publisher_Name AS 'Видавець', CardIn_Publisher.Publisher_City AS 'Місто видання', CardIn_Topic.Topic_Name AS 'Тема', CardIn_Discipline.Discipline_Name AS 'Дисципліна' 
+	FROM CardIn_Main, CardIn_Publisher, CardIn_Format, CardIn_Topic, CardIn_Discipline 
+	WHERE CardIn_Main.Publisher_ID=CardIn_Publisher.Publisher_ID AND CardIn_Main.Format_ID=CardIn_Format.Format_ID AND CardIn_Main.Topic_ID=CardIn_Topic.Topic_ID AND CardIn_Main.Discipline_ID=CardIn_Discipline.Discipline_ID AND CardIN_Discipline.Discipline_Name LIKE DisName ORDER BY CardIn_Main.ID; 
+END //
+DELIMITER ;
+CALL GetDisc_Name('Література');

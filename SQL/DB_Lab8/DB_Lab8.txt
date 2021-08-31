@@ -1,0 +1,177 @@
+1.	Кількість тем може бути в діапазоні від 5 до 10 :
+
+DROP TRIGGER IF EXISTS trigger_1;
+DELIMITER $$
+
+CREATE TRIGGER trigger_1 BEFORE INSERT ON Теми FOR EACH ROW
+IF (SELECT COUNT(*) FROM Теми) > 10
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Кількість більша 10';
+ELSEIF (SELECT COUNT(*) FROM Теми) < 5
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Кількість менша за 5';
+END IF $$
+
+DELIMITER ;
+
+2.	Новинкою може бути тільки книга видана в поточному році :
+
+DROP TRIGGER IF EXISTS trigger_2;
+DELIMITER $$
+
+CREATE TRIGGER trigger_2 BEFORE INSERT ON table_1 FOR EACH ROW
+IF (YEAR(NEW.Дата) != YEAR(NOW()) AND NEW.Новинка = 'Yes')
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Новинкою може бути тільки книга видана в поточному році.';
+END IF $$
+
+DELIMITER ;
+
+3.	Книга з кількістю сторінок до 100 не може коштувати більше 10 $, до 200 - 20 $, до 300 - 30 $ :
+
+DROP TRIGGER IF EXISTS trigger_3;
+DELIMITER $$
+
+CREATE TRIGGER trigger_3 BEFORE INSERT ON table_1 FOR EACH ROW
+IF ((NEW.Сторiнки < 100 AND NEW.Цiна > 10) OR (NEW.Сторiнки < 200 AND NEW.Цiна > 20) OR (NEW.Сторiнки < 300 AND NEW.Цiна > 30))
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Неможлива ціна при даній кількості сторінок.';
+END IF $$
+
+DELIMITER ;
+
+
+4.	Видавництво "BHV" не випускає книги накладом меншим 5000, а видавництво Diasoft - 10000 :
+
+DROP TRIGGER IF EXISTS trigger_4;
+DELIMITER $$
+
+CREATE TRIGGER trigger_4 BEFORE INSERT ON table_1 FOR EACH ROW
+IF ((NEW.Видавництво_ID = 2 AND NEW.Тираж < 5000) OR (NEW.Видавництво_ID = 6 AND NEW.Тираж < 10000))
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Помилка сумісності видання та тиражу.';
+END IF $$
+
+DELIMITER ;
+
+5.	Книги з однаковим кодом повинні мати однакові дані :
+
+DROP TRIGGER IF EXISTS trigger_5;
+DELIMITER $$
+
+CREATE TRIGGER trigger_5 BEFORE UPDATE ON table_1 FOR EACH ROW
+IF (OLD.Код = NEW.Код)
+THEN
+	IF (OLD.Новинка != NEW.Новинка OR OLD.Назва != NEW.Назва OR OLD.Цiна != NEW.Цiна OR OLD.Видавництво_ID != NEW.Видавництво_ID OR OLD.Сторiнки != NEW.Сторiнки OR
+        OLD.Формат_ID != NEW.Формат_ID OR OLD.Дата != NEW.Дата OR OLD.Тираж != NEW.Тираж OR OLD.Тема_ID != NEW.Тема_ID OR OLD.Категорiя_ID != NEW.Категорiя_ID)
+    THEN
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Книги з однаковими кодами повинні мати однакові дані.';
+    END IF;
+END IF $$
+
+DELIMITER ;
+
+6*.	При спробі видалення книги видається інформація про кількість видалених рядків. Якщо користувач не "dbo", то видалення забороняється :
+
+// в mysql не работает
+
+DELIMITER $$
+
+CREATE TRIGGER trigger_6 BEFORE INSERT ON table_1 FOR EACH ROW
+IF (SUBSTRING_INDEX(CURRENT_USER(), '@', 1) != 'root')
+THEN
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Помилка: лише користувач dbo має доступ.';
+ELSE
+	
+END IF $$
+
+DELIMITER ;
+
+7.	Користувач "dbo" не має права змінювати ціну книги :
+
+DROP TRIGGER IF EXISTS trigger_7;
+DELIMITER $$
+
+CREATE TRIGGER trigger_7 BEFORE UPDATE ON table_1 FOR EACH ROW
+IF (SUBSTRING_INDEX(CURRENT_USER(), '@', 1) = 'root')
+THEN
+	IF (OLD.Цiна != NEW.Цiна)
+    THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Користувачу dbo не має доступу.';
+    END IF;
+END IF $$
+
+DELIMITER ;
+
+8.	Видавництва ДМК і Еком підручники не видають :
+
+DROP TRIGGER IF EXISTS trigger_8;
+DELIMITER $$
+
+CREATE TRIGGER trigger_8 BEFORE INSERT ON table_1 FOR EACH ROW
+IF (NEW.Видавництво_ID = 7 OR NEW.Видавництво_ID = 9)
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Дане видавництво не видає підручники.';
+END IF $$
+
+DELIMITER ;
+
+9*.	Видавництво не може випустити більше 10 новинок протягом одного місяця поточного року : 
+
+DROP TRIGGER IF EXISTS trigger_9;
+DELIMITER $$
+
+CREATE TRIGGER trigger_9 BEFORE INSERT ON table_1 FOR EACH ROW
+IF 
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Видавництво не може випустити більше 10 новинок протягом одного місяця поточного року';
+END $$
+
+DELIMITER ;
+
+// не работает
+
+10.	Видавництво BHV не випускає книги формату 60х88/16 :
+
+DROP TRIGGER IF EXISTS trigger_10;
+DELIMITER $$
+
+CREATE TRIGGER trigger_10 BEFORE INSERT ON table_1 FOR EACH ROW
+IF (NEW.Видавництво_ID = 2 AND NEW.Формат_ID = 2)
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Дане видавництво не видає підручники цього формату.';
+END IF $$
+
+DELIMITER ;
+
+1) триггер для проверки названия издателя состоит не менее из 5 символов
+
+DROP TRIGGER IF EXISTS trigger_spec1;
+DELIMITER $$
+
+CREATE TRIGGER trigger_spec1 BEFORE INSERT ON Видавцi
+FOR EACH ROW
+IF CHAR_LENGTH(NEW.Видавництво) < 5
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Назва видавництва не може бути коротшою за 5 символів.';
+END IF $$
+
+DELIMITER ;
+
+Для проверки: INSERT INTO `Видавцi` (`Видавництво_ID`, `Видавництво`) VALUES (12, "Тест")
+
+2) количество книг не может превышать текущее+1
+
+DROP TRIGGER IF EXISTS trigger_spec2;
+DELIMITER $$
+
+CREATE TRIGGER trigger_spec2 BEFORE INSERT ON table_1 
+FOR EACH ROW
+IF (SELECT COUNT(*) FROM table_1) > 20
+THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Кількість книг не може бути вищою за вираз теперішня кількість[19] + 1.';
+END IF $$
+
+DELIMITER ;
+
+Для проверки: INSERT INTO `table_1` (`N`, `Код`, `Новинка`, `Назва`, `Цiна`, `Видавництво_ID`, `Сторiнки`, `Формат_ID`, `Дата`, `Тираж`, `Тема_ID`, `Категорiя_ID`) VALUES (230, 1495, 'Yes', 'Порожня_книга_1', 5.30, 11, NULL, 1, '2021-04-09', NULL, 1, 1)

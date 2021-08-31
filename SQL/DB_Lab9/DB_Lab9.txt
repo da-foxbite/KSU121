@@ -1,0 +1,70 @@
+1.	Розробити та перевірити скалярну (scalar) функцію, що повертає загальну вартість книг виданих в певному році :
+
+DROP FUNCTION IF EXISTS YearlyBookValue;
+DELIMITER $$
+CREATE FUNCTION YearlyBookValue(Rik INT)
+	RETURNS FLOAT
+    	BEGIN
+			RETURN (SELECT SUM(table_1.Цiна) FROM table_1 WHERE YEAR(Дата)=Rik);
+END $$
+DELIMITER ;
+SELECT YearlyBookValue(2000) AS `Вартість книг`;
+
+
+
+
+2.	Розробити і перевірити табличну (inline) функцію, яка повертає список книг виданих в певному році:
+
+// в mysql таблицу через функцию вернуть не можем, нужны процедуры
+
+DROP FUNCTION IF EXISTS YearlyBookShow;
+DELIMITER $$
+CREATE FUNCTION YearlyBookShow(Rik INT)
+	RETURNS TABLE
+		BEGIN
+			RETURN (SELECT table_1.Назва FROM table_1 WHERE YEAR(Дата)=Rik);
+END $$
+DELIMITER ;
+SELECT YearlyBookShow(2000) AS `Книги`;
+
+
+
+
+3.	Розробити і перевірити функцію типу multi-statement, яка буде:
+   a.	приймати в якості вхідного параметра рядок, що містить список назв видавництв, розділених символом ‘;’;  
+   b.	виділяти з цього рядка назву видавництва;
+   c.	формувати нумерований список назв видавництв.
+
+-
+
+
+
+
+4.	Виконати набір операцій по роботі з SQL курсором: оголосити курсор;
+   a.	використовувати змінну для оголошення курсору;
+   b.	відкрити курсор;
+   c.	переприсвоїти курсор іншої змінної;
+   d.	виконати вибірку даних з курсору;
+   e.	закрити курсор;
+5.	звільнити курсор. Розробити курсор для виводу списка книг виданих у визначеному році:
+
+
+
+DELIMITER $$
+CREATE PROCEDURE TESTPROC(INOUT BookNameList VARCHAR(), IN tyear INT(4))
+BEGIN
+	DECLARE done INT DEFAULT 0;
+	DECLARE BookName VARCHAR(50);
+	DECLARE curs CURSOR FOR SELECT Назва FROM table_1 WHERE YEAR(Дата)=tyear;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;
+	
+OPEN curs;
+
+FETCH curs INTO BookName;
+IF
+ELSE
+END IF;
+
+CLOSE curs;
+END $$
+DELIMITER ;
